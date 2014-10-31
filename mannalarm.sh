@@ -2,8 +2,8 @@
 
 while :
 do
-    echo "Henter data..."
-	JSON=$(curl http://www.vondess.com/mannen/api)
+    echo "$(date): Henter data..."
+	JSON=$(curl --fail --silent --show-error http://www.vondess.com/mannen/api)
         #JSON='{ "falt_ned": true }'
 
 	if [ $? -eq 0 ]; then
@@ -12,7 +12,7 @@ do
 		if [ "$HAR_RAMLET_NED" == "true" ]; then
 		    while :
 		    do
-			    echo "MANNEN HAR RAMLET NED!!"
+			    echo "$(date): MANNEN HAR RAMLET NED!!"
 				for i in `seq 1 3`;
 				do
 					./lamp on
@@ -23,7 +23,7 @@ do
 				sleep 15
 		    done
 		else
-		    echo "Mannen har enda ikke ramlet ned"
+		    echo "$(date): Mannen har enda ikke ramlet ned"
 		    sleep 60
 		fi
 	else
