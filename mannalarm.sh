@@ -3,19 +3,16 @@
 while :
 do
     echo "Henter data..."
-	#JSON=$(curl http://www.vondess.com/mannen/api)
-        JSON='{ "falt_ned": true }'
+	JSON=$(curl http://www.vondess.com/mannen/api)
+        #JSON='{ "falt_ned": true }'
 
 	if [ $? -eq 0 ]; then
 		HAR_RAMLET_NED=$(echo $JSON | jq -r '.falt_ned')
-
-		echo " => $HAR_RAMLET_NED"
 
 		if [ "$HAR_RAMLET_NED" == "true" ]; then
 		    while :
 		    do
 			    echo "MANNEN HAR RAMLET NED!!"
-			    
 				for i in `seq 1 3`;
 				do
 					./lamp on
@@ -30,7 +27,7 @@ do
 		    sleep 60
 		fi
 	else
-		echo "Nettverksfeil.." 
+		echo "Nettverksfeil.."
 		sleep 60
 	fi
 done
